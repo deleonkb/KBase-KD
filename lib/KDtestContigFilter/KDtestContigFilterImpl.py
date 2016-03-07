@@ -65,6 +65,7 @@ This sample module contains one small method - filter_contigs.
             raise ValueError('Cannot parse integer from min_length parameter (' + str(min_length_orig) + ')')
         if min_length < 0:
             raise ValueError('min_length parameter shouldn\'t be negative (' + str(min_length) + ')')
+        max_length_orig = params['max_length']
         
 
         # Step 2- Download the input data
@@ -93,10 +94,10 @@ This sample module contains one small method - filter_contigs.
         n_remaining = 0;
         for contig in contigSet['contigs']:
             n_total += 1
-            if len(contig['sequence']) >= min_length:
+            if len(contig['sequence']) >= min_length and len(contig['sequence'])<=max_length:
                 good_contigs.append(contig)
                 n_remaining += 1
-
+	
         # replace the contigs in the contigSet object in local memory
         contigSet['contigs'] = good_contigs
         
