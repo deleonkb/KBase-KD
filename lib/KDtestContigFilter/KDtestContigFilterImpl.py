@@ -73,7 +73,7 @@ This sample module contains one small method - filter_contigs.
             raise ValueError('Cannot parse integer from max_length parameter (' + str(max_length_orig) + ')')
         if max_length < 0:
             raise ValueError('max_length parameter shouldn\'t be negative (' + str(max_length) + ')')
-        if max_length == min_length:
+        if max_length <= min_length:
             raise ValueError('max_length cannot be the same as min_length (' + str(max_length) + ')')
 
         # Step 2- Download the input data
