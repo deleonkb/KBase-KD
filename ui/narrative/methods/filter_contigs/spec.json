@@ -42,7 +42,7 @@
             "field_type": "text",
             "text_options": {
                 "validate_as": "int",
-                "min_integer" : 10
+                "max_integer" : 100000
             }
         }
     ],
@@ -99,6 +99,11 @@
                     "input_parameter": "min_length",
                     "target_property": "input_min_length"
                 },
+                {
+                    "input_parameter": "max_length",
+                    "target_property": "input_max_length"
+                },
+
                 {
                     "narrative_system_variable": "workspace",
                     "target_property": "workspace_name"

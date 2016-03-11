@@ -66,7 +66,14 @@ This sample module contains one small method - filter_contigs.
         if min_length < 0:
             raise ValueError('min_length parameter shouldn\'t be negative (' + str(min_length) + ')')
         max_length_orig = params['max_length']
-        
+         try:
+            max_length = int(max_length_orig)
+        except ValueError:
+            raise ValueError('Cannot parse integer from max_length parameter (' + str(max_length_orig) + ')')
+        if max_length < 0:
+            raise ValueError('max_length parameter shouldn\'t be negative (' + str(max_length) + ')')
+        if max_length = min_length:
+            raise ValueError('max_length cannot be the same as min_length (' + str(max_length) + ')')
 
         # Step 2- Download the input data
         # Most data will be based to your method by its workspace name.  Use the workspace to pull that data
@@ -75,7 +82,7 @@ This sample module contains one small method - filter_contigs.
         token = ctx['token']
         wsClient = workspaceService(self.workspaceURL, token=token) 
         try: 
-            # Note that results from the workspace are returned in a list, and the actual data is saved
+            # Note that results from the workspace are returned in a list, and the actual data is savyed
             # in the 'data' key.  So to get the ContigSet data, we get the first element of the list, and
             # look at the 'data' field.
             contigSet = wsClient.get_objects([{'ref': workspace_name+'/'+contigset_id}])[0]['data']
@@ -94,7 +101,7 @@ This sample module contains one small method - filter_contigs.
         n_remaining = 0;
         for contig in contigSet['contigs']:
             n_total += 1
-            if len(contig['sequence']) >= min_length and len(contig['sequence'])<=max_length:
+            if len(contig['sequence']) >= min_length and len(contig['sequence'])<=max_length_orig:
                 good_contigs.append(contig)
                 n_remaining += 1
 	
